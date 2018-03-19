@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as tarefasActions from '../store/tarefas/actions';
-import * as tarefasSelectors from '../store/tarefas/reducer';
 
 class IndexPage extends Component {
 
@@ -12,7 +11,6 @@ class IndexPage extends Component {
 
   render() {
     const tarefas = this.props.tarefas || [];
-    console.log('as',tarefas);
     return (
       <div>
         <ul>
@@ -33,7 +31,7 @@ class IndexPage extends Component {
 
 function mapStateToProps(state) {
   return {
-    tarefas: tarefasSelectors.getTarefas(state)
+    tarefas: state.tarefas.tarefas
   }
 };
 

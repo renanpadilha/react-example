@@ -37,7 +37,7 @@ img {
 .nav .nav-text {
   text-align: center !important;
   font-size: 0.9rem;
-  padding-top: 2px;
+  padding-top: 0.3rem;
   color: #FFF;
   flex: 5;
 }
@@ -86,7 +86,9 @@ img {
   filter: brightness(200);
 }
 
-.photo-content {}
+.photo-content {
+  margin-bottom: -4px;
+}
 
 .map-responsive {
   height: 150px;
@@ -180,6 +182,19 @@ img {
   margin-bottom: 1rem;
 }
 
+.addressRow {
+  background-color: #CB8A19;
+  height: 1.3em;
+}
+
+.float-right {
+  float: right;
+  height: 1em;
+  color: #FFF;
+  padding-right: 1em;
+  font-size: 0.9rem;
+}
+
 .comments {
   margin-top: 1rem;
   margin-right: 1rem;
@@ -271,5 +286,10 @@ hr {
 
 p {
   text-align: justify;
+  color: #CB8A19;
+}
+
+a {
+  text-decoration: none;
   color: #CB8A19;
 }

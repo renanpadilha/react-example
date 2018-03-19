@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class FotoTitle extends Component {
+export default class TarefaTitle extends Component {
   render() {
     return (
       <div className="title">

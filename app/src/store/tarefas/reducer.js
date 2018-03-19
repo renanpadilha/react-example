@@ -1,13 +1,14 @@
-import { List } from 'immutable';
+// import { List } from 'immutable';
 import * as types from './actionTypes';
 
-export default function reduce(state = new List(), action = {}) {
+const INITIAL_STATE = { tarefa: {}, tarefas: [] }
+
+export default function reduce(state = INITIAL_STATE, action = {}) {
   switch (action.type) {
     case types.FETCH_TAREFAS:
-      return new List(action.tarefas);
+      return { ...state, tarefas: action.tarefas };
     case types.FETCH_TAREFA:
-      console.log('REDUCER', action.tarefa);
-      return action.tarefa;
+      return { ...state, tarefa: action.tarefa };
     default:
       return state;
   }
@@ -18,6 +19,5 @@ export function getTarefas(state) {
 }
 
 export function getTarefaById(state) {
-  console.log('REDUCER2', state.tarefas);
-  return state.tarefas;
+  return state;
 }

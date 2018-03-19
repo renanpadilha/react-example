@@ -16,7 +16,6 @@ export function getTarefaById(id) {
   return async (dispatch, getState) => {
     try {
       const tarefa = await TarefasService.getTarefaById(id);
-      console.log('TAREFA ACTION', tarefa)
       dispatch({ type: types.FETCH_TAREFA, tarefa });
     } catch (error) {
       console.error(error);

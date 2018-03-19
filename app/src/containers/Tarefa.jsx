@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as tarefasActions from '../store/tarefas/actions';
-import * as tarefasSelectors from '../store/tarefas/reducer';
 import Header from '../components/Header';
 import FotoTarefa from '../components/FotoTarefa';
 import TarefaTitle from '../components/TarefaTitle';
@@ -13,11 +12,25 @@ import InfoText from '../components/InfoText';
 import Map from '../components/Map';
 import CommentBox from '../components/CommentBox';
 import Comment from '../components/Comment';
+import AddressRow from '../components/AddressRow';
 
 class Tarefa extends Component {
 
+  constructor(props) {
+    super(props);
+    this.showAddress = this.showAddress.bind(this);
+  }
+
   componentDidMount() {
     this.props.dispatch(tarefasActions.getTarefaById(this.props.match.params.id));
+  }
+
+  showAddress() {
+    alert(this.props.tarefa.endereco);
+  }
+
+  showComments() {
+    document.getElementById("comments").scrollIntoView();
   }
 
   render() {
@@ -29,16 +42,17 @@ class Tarefa extends Component {
           <FotoTarefa url={this.props.tarefa.urlFoto}></FotoTarefa>
           <TarefaTitle title={this.props.tarefa.titulo}/>
           <ActionBox>
-            <Button> <Icon name="icon-call"/>Ligar</Button> 
-            <Button> <Icon name="icon-services"/> Serviços</Button> 
-            <Button> <Icon name="icon-local"/> Endereço</Button>
-            <Button> <Icon name="icon-comments"/> Comentários</Button>
+            <Button href={"tel:" + this.props.tarefa.telefone}> <Icon name="icon-call"/> Ligar</Button> 
+            <Link to={'/servicos'}> <Button> <Icon name="icon-services" /> Serviços</Button> </Link>
+            <Button click={this.showAddress}> <Icon name="icon-local" /> Endereço</Button>
+            <Button click={this.showComments}> <Icon name="icon-comments"/> Comentários</Button>
             <Button> <Icon name="icon-favorites"/> Favoritos</Button>
           </ActionBox>
           <InfoText>
             {this.props.tarefa.texto}
           </InfoText>
           <Map latitude={this.props.tarefa.latitude} longitude={this.props.tarefa.longitude}/>
+          <AddressRow endereco={this.props.tarefa.endereco}/>
           <CommentBox> 
             {
               comentarios.map((comentario, index) => {
@@ -62,7 +76,7 @@ class Tarefa extends Component {
 
 function mapStateToProps(state) {
   return {
-    tarefa: tarefasSelectors.getTarefaById(state)
+    tarefa: state.tarefas.tarefa
   }
 };
 
